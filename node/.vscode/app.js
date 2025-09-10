@@ -224,20 +224,47 @@
 
 //GET DATA:
 
+// const express = require('express');
+// const app = express();
+// const port = 8080;
+// app.use(express.static(__dirname));
+
+// //app.use(express.satatic(__dirname));
+// const users = [
+//     {user: "Laurence", pass: "password"},
+//     {user: "Medvedev", pass: "secret"}
+// ];
+// app.get('/', function(req, res){
+//     res.sendFile(__dirname + '/index1.html');
+// })
+
+// app.listen(port, function(){
+//     return console.log('port is' + port);
+// })
+
+
+//Body Parser :
+
 const express = require('express');
 const app = express();
 const port = 8080;
-app.use(express.static(__dirname));
+const bodyParser = require('body-parser');
 
-//app.use(express.satatic(__dirname));
-const users = [
-    {user: "Laurence", pass: "password"},
-    {user: "Medvedev", pass: "secret"}
-];
-app.get('/', function(req, res){
-    res.sendFile(__dirname + '/indext1.html');
-})
+app.use(bodyParser.urlencoded({
+    extended: true}));
+    app.use(bodyParser.json());// for parser JSON
+    app.use(express.static(__dirname + '/public'));
+    app.get('/', function(req, res){
+        res.sendFile("indext.html");
+    })
+    app.post('/login', function(req, res) {
+        let userName = req.body.user;
+        let passWord = req.body.pass;
+        console.log(userName + '' + passWord);
+        res.json({status : true})
+    })
+
 
 app.listen(port, function(){
     return console.log('port is' + port);
-})
+}) 
