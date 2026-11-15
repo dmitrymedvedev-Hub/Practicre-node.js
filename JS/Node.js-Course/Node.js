@@ -50,3 +50,6 @@ function reverseString(str) {
 console.log(reverseString("Abdallah Mohammed Elmahady"));
 
 
+function getRevers(srt){
+    return str
+}
